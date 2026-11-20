@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+apply(from = "mixpanel.gradle.kts")
+
 android {
     namespace = "com.jithin.brotestapp"
     compileSdk {
@@ -17,6 +19,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val mixpanelKey = project.extra["MIX_PANEL_API_KEY"] as? String ?: "ABCD"
+        buildConfigField("String", "MIX_PANEL_API_KEY", "\"$mixpanelKey\"")
     }
 
     buildTypes {
@@ -32,6 +37,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 

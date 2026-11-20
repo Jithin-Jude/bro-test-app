@@ -1,6 +1,7 @@
 package com.jithin.brotestapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -30,6 +31,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         count = savedInstanceState?.getInt("count") ?: 0
+        val apiKey = BuildConfig.MIX_PANEL_API_KEY
+        Log.d("MainActivity", "Mixpanel API Key: $apiKey")
         enableEdgeToEdge()
         setContent {
             BroTestAppTheme {
@@ -43,6 +46,7 @@ class MainActivity : ComponentActivity() {
                         Greeting(
                             name = "Android",
                             count = count,
+                            apiKey = apiKey,
                             onIncrement = { count++ }
                         )
                     }
@@ -58,13 +62,17 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, count: Int, onIncrement: () -> Unit, modifier: Modifier = Modifier) {
+fun Greeting(name: String, count: Int, apiKey: String, onIncrement: () -> Unit, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = "Hello $name! Count: $count"
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = "Mixpanel Key: $apiKey"
         )
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = onIncrement) {
@@ -77,6 +85,6 @@ fun Greeting(name: String, count: Int, onIncrement: () -> Unit, modifier: Modifi
 @Composable
 fun GreetingPreview() {
     BroTestAppTheme {
-        Greeting("Android", count = 0, onIncrement = {})
+        Greeting("Android", count = 0, apiKey = "ABCD", onIncrement = {})
     }
 }
