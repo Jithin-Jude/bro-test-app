@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
                             Spacer(modifier = Modifier.height(16.dp))
                             Button(
                                 onClick = {
-                                    SecondActivity.launchActivity(this@MainActivity)
+                                    SecondActivity.launchActivity(this@MainActivity, message = "Message From 1st Activity")
                                 }
                             ) {
                                 Text("Go to 2nd Activity")

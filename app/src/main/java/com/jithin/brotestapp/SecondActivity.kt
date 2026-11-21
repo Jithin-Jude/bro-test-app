@@ -20,13 +20,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import com.jithin.brotestapp.BroLogger.printLog
 import com.jithin.brotestapp.ui.theme.BroTestAppTheme
 
 class SecondActivity : ComponentActivity() {
 
     companion object {
-        fun launchActivity(context: Context) {
+        const val KEY_MESSAGE = "message"
+        fun launchActivity(context: Context, message: String?) {
             val intent = Intent(context, SecondActivity::class.java)
+            intent.putExtra(KEY_MESSAGE, message)
             context.startActivity(intent)
         }
     }
@@ -34,6 +37,10 @@ class SecondActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val message = intent.getStringExtra(KEY_MESSAGE)
+        printLog("$message")
+
         setContent {
             BroTestAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
