@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -22,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import com.jithin.brotestapp.BroLogger.printLog
 import com.jithin.brotestapp.ui.theme.BroTestAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -30,9 +32,10 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        printLog("MainActivity: onCreate")
         count = savedInstanceState?.getInt("count") ?: 0
         val apiKey = BuildConfig.MIX_PANEL_API_KEY
-        Log.d("MainActivity", "Mixpanel API Key: $apiKey")
+        printLog("Mixpanel API Key: $apiKey")
         enableEdgeToEdge()
         setContent {
             BroTestAppTheme {
@@ -43,12 +46,25 @@ class MainActivity : ComponentActivity() {
                             .padding(innerPadding),
                         contentAlignment = Alignment.Center
                     ) {
-                        Greeting(
-                            name = "Android",
-                            count = count,
-                            apiKey = apiKey,
-                            onIncrement = { count++ }
-                        )
+                        Column(modifier = Modifier
+                            .fillMaxSize(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center) {
+                            Greeting(
+                                name = "Android",
+                                count = count,
+                                apiKey = apiKey,
+                                onIncrement = { count++ }
+                            )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Button(
+                                onClick = {
+                                    SecondActivity.launchActivity(this@MainActivity)
+                                }
+                            ) {
+                                Text("Go to 2nd Activity")
+                            }
+                        }
                     }
                 }
             }
@@ -57,37 +73,45 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
+        printLog("MainActivity: onStart")
     }
 
     override fun onResume() {
         super.onResume()
+        printLog("MainActivity: onResume")
     }
 
     override fun onPause() {
         super.onPause()
+        printLog("MainActivity: onPause")
     }
 
     override fun onStop() {
         super.onStop()
+        printLog("MainActivity: onStop")
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        printLog("MainActivity: onDestroy")
     }
 
     override fun onRestart() {
         super.onRestart()
+        printLog("MainActivity: onRestart")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putInt("count", count)
         super.onSaveInstanceState(outState)
+        printLog("MainActivity: onSaveInstanceState")
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
 //        count = savedInstanceState.getInt("count")
 
         super.onRestoreInstanceState(savedInstanceState)
+        printLog("MainActivity: onRestoreInstanceState")
     }
 }
 
