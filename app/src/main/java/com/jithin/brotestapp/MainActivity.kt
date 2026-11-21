@@ -21,6 +21,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import com.jithin.brotestapp.BroLogger.printLog
@@ -62,7 +63,7 @@ class MainActivity : ComponentActivity() {
                                     SecondActivity.launchActivity(this@MainActivity, message = "Message From 1st Activity")
                                 }
                             ) {
-                                Text("Go to 2nd Activity")
+                                Text(stringResource(R.string.go_to_2nd_activity))
                             }
                         }
                     }
