@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -65,6 +66,8 @@ class MainActivity : ComponentActivity() {
                             ) {
                                 Text(stringResource(R.string.go_to_2nd_activity))
                             }
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Parent()
                         }
                     }
                 }
@@ -134,6 +137,37 @@ fun Greeting(name: String, count: Int, apiKey: String, onIncrement: () -> Unit, 
             Text("Increment")
         }
     }
+}
+
+
+// Kotlin Recomposition eg
+@Composable
+fun Parent() {
+    var count by remember { mutableIntStateOf(0) }
+    printLog("Compose: Parent")
+
+    Column {
+        printLog("Compose: Column")
+        Child1(count)
+        Child2()
+
+        Button(onClick = { count++ }) {
+            printLog("Compose: Button")
+            Text("Increment")
+        }
+    }
+}
+
+@Composable
+fun Child1(count: Int) {
+    printLog("Compose: Child1")
+    Text("Count: $count")
+}
+
+@Composable
+fun Child2() {
+    printLog("Compose: Child2")
+    Text("Static content")
 }
 
 @Preview(showBackground = true)
