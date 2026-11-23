@@ -52,28 +52,28 @@ class MainActivity : ComponentActivity() {
                             .padding(innerPadding),
                         contentAlignment = Alignment.Center
                     ) {
-                        ResponsiveScreen()
-//                        Column(modifier = Modifier
-//                            .fillMaxSize(),
-//                            horizontalAlignment = Alignment.CenterHorizontally,
-//                            verticalArrangement = Arrangement.Center) {
-//                            Greeting(
-//                                name = "Android",
-//                                count = count,
-//                                apiKey = apiKey,
-//                                onIncrement = { count++ }
-//                            )
-//                            Spacer(modifier = Modifier.height(16.dp))
-//                            Button(
-//                                onClick = {
-//                                    SecondActivity.launchActivity(this@MainActivity, message = "Message From 1st Activity")
-//                                }
-//                            ) {
-//                                Text(stringResource(R.string.go_to_2nd_activity))
-//                            }
-//                            Spacer(modifier = Modifier.height(16.dp))
-//                            Parent()
-//                        }
+//                        ResponsiveScreen()
+                        Column(modifier = Modifier
+                            .fillMaxSize(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center) {
+                            Greeting(
+                                name = "Android",
+                                count = count,
+                                apiKey = apiKey,
+                                onIncrement = { count++ }
+                            )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Button(
+                                onClick = {
+                                    SecondActivity.launchActivity(this@MainActivity, message = "Message From 1st Activity")
+                                }
+                            ) {
+                                Text(stringResource(R.string.go_to_2nd_activity))
+                            }
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Parent()
+                        }
                     }
                 }
             }

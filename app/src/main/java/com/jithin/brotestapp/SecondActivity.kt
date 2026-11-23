@@ -20,8 +20,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.jithin.brotestapp.BroLogger.printLog
 import com.jithin.brotestapp.ui.theme.BroTestAppTheme
+import kotlinx.coroutines.launch
 
 class SecondActivity : ComponentActivity() {
 
@@ -36,10 +41,24 @@ class SecondActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        printLog("SecondActivity: onCreate")
         enableEdgeToEdge()
 
         val message = intent.getStringExtra(KEY_MESSAGE)
         printLog("$message")
+
+//        lifecycle.currentState == Lifecycle.State.INITIALIZED
+//
+//        lifecycle.coroutineScope.launch {
+//
+//        }
+//
+//        lifecycleScope.launch {
+//
+//            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+//
+//            }
+//        }
 
         setContent {
             BroTestAppTheme {
@@ -64,36 +83,44 @@ class SecondActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
+        printLog("SecondActivity: onStart")
     }
 
     override fun onResume() {
         super.onResume()
+        printLog("SecondActivity: onResume")
     }
 
     override fun onPause() {
         super.onPause()
+        printLog("SecondActivity: onPause")
     }
 
     override fun onStop() {
         super.onStop()
+        printLog("SecondActivity: onStop")
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        printLog("SecondActivity: onDestroy")
     }
 
     override fun onRestart() {
         super.onRestart()
+        printLog("SecondActivity: onRestart")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        printLog("SecondActivity: onSaveInstanceState")
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
 //        count = savedInstanceState.getInt("count")
 
         super.onRestoreInstanceState(savedInstanceState)
+        printLog("SecondActivity: onRestoreInstanceState")
     }
 }
 
