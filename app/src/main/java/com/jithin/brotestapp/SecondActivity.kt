@@ -16,11 +16,13 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -69,8 +71,9 @@ class SecondActivity : ComponentActivity() {
                             .padding(innerPadding),
                         contentAlignment = Alignment.Center
                     ) {
+                        val count by BroLogger.vm.count.collectAsStateWithLifecycle()
                         Greeting(
-                            name = "I am 2nd Activity.",
+                            name = "I am 2nd Activity: $count",
                             onClickGoBack = {
                                 finish()
                             }
@@ -94,6 +97,7 @@ class SecondActivity : ComponentActivity() {
     override fun onPause() {
         super.onPause()
         printLog("SecondActivity: onPause")
+        BroLogger.vm.increment()
     }
 
     override fun onStop() {
