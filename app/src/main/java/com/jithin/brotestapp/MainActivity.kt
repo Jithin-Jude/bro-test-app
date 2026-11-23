@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -15,6 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -25,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.window.core.layout.WindowSizeClass
 import com.jithin.brotestapp.BroLogger.printLog
 import com.jithin.brotestapp.ui.theme.BroTestAppTheme
 
@@ -48,27 +52,28 @@ class MainActivity : ComponentActivity() {
                             .padding(innerPadding),
                         contentAlignment = Alignment.Center
                     ) {
-                        Column(modifier = Modifier
-                            .fillMaxSize(),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center) {
-                            Greeting(
-                                name = "Android",
-                                count = count,
-                                apiKey = apiKey,
-                                onIncrement = { count++ }
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Button(
-                                onClick = {
-                                    SecondActivity.launchActivity(this@MainActivity, message = "Message From 1st Activity")
-                                }
-                            ) {
-                                Text(stringResource(R.string.go_to_2nd_activity))
-                            }
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Parent()
-                        }
+                        ResponsiveScreen()
+//                        Column(modifier = Modifier
+//                            .fillMaxSize(),
+//                            horizontalAlignment = Alignment.CenterHorizontally,
+//                            verticalArrangement = Arrangement.Center) {
+//                            Greeting(
+//                                name = "Android",
+//                                count = count,
+//                                apiKey = apiKey,
+//                                onIncrement = { count++ }
+//                            )
+//                            Spacer(modifier = Modifier.height(16.dp))
+//                            Button(
+//                                onClick = {
+//                                    SecondActivity.launchActivity(this@MainActivity, message = "Message From 1st Activity")
+//                                }
+//                            ) {
+//                                Text(stringResource(R.string.go_to_2nd_activity))
+//                            }
+//                            Spacer(modifier = Modifier.height(16.dp))
+//                            Parent()
+//                        }
                     }
                 }
             }
@@ -117,6 +122,50 @@ class MainActivity : ComponentActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         printLog("MainActivity: onRestoreInstanceState")
     }
+}
+
+@OptIn(ExperimentalMaterial3AdaptiveApi::class)
+@Composable
+fun ResponsiveScreen() {
+
+    val windowSizeClass =
+        currentWindowAdaptiveInfoV2().windowSizeClass
+
+    val isCompact = windowSizeClass
+        .isWidthAtLeastBreakpoint(
+            WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND
+        ).not()
+
+    if (isCompact) {
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            ProfileCard()
+            DetailsCard()
+        }
+    } else {
+        Row(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Box(Modifier.weight(1f)) {
+                ProfileCard()
+            }
+
+            Box(Modifier.weight(1f)) {
+                DetailsCard()
+            }
+        }
+    }
+}
+
+@Composable
+fun ProfileCard() {
+    Text("Profile")
+}
+
+@Composable
+fun DetailsCard() {
+    Text("Details")
 }
 
 @Composable
