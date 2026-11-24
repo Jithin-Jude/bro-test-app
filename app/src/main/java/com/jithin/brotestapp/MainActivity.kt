@@ -72,6 +72,14 @@ class MainActivity : ComponentActivity() {
                                 Text(stringResource(R.string.go_to_2nd_activity))
                             }
                             Spacer(modifier = Modifier.height(16.dp))
+                            Button(
+                                onClick = {
+                                    MyActivity.launchActivity(this@MainActivity)
+                                }
+                            ) {
+                                Text(stringResource(R.string.go_to_my_activity))
+                            }
+                            Spacer(modifier = Modifier.height(16.dp))
                             Parent()
                         }
                     }

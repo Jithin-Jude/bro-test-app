@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Bro Test App</string>
     <string name="go_to_2nd_activity">Go to 2nd Activity</string>
+    <string name="go_to_my_activity">Go to My Activity</string>
 </resources>

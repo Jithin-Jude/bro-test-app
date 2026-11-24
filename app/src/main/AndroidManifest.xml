@@ -26,6 +26,9 @@
         <activity
             android:name=".SecondActivity"
             android:exported="false" />
+        <activity
+            android:name=".MyActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
