@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.asStateFlow
  */
 
 class MyActivityViewModel(
-    private val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle
 ): ViewModel() {
     private val _count = savedStateHandle.getMutableStateFlow("count", 0)
     val count = _count.asStateFlow()
