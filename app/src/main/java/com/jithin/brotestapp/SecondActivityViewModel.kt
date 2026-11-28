@@ -1,5 +1,6 @@
 package com.jithin.brotestapp
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,12 +15,11 @@ import kotlinx.coroutines.flow.asStateFlow
  * --------------------------------------------------------------------------
  */
 
+class SecondActivityViewModel(
+    savedStateHandle: SavedStateHandle
+): ViewModel() {
 
-val secondActivityViewModel = SecondActivityViewModel()
-
-class SecondActivityViewModel: ViewModel() {
-
-    private val _count = MutableStateFlow(0)
+    private val _count = savedStateHandle.getMutableStateFlow("", 0)
     val count = _count.asStateFlow()
 
     fun increment(){

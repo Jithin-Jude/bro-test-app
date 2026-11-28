@@ -13,31 +13,31 @@
         android:theme="@style/Theme.BroTestApp">
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".SecondActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.BroTestApp"
             android:windowSoftInputMode="adjustResize">
+
+        </activity>
+        <activity
+            android:name=".MyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyExamActivity"
+            android:exported="false"></activity>
+        <activity
+            android:name=".xml_test.MyXmlActivity"
+            android:exported="true"
+            android:theme="@style/Theme.BroTestApp"
+            android:windowSoftInputMode="adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".MyActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".MyExamActivity"
-            android:exported="false">
-
         </activity>
     </application>
 

@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -31,6 +32,8 @@ import com.jithin.brotestapp.ui.theme.BroTestAppTheme
 import kotlinx.coroutines.launch
 
 class SecondActivity : ComponentActivity() {
+
+    private val secondActivityViewModel: SecondActivityViewModel by viewModels()
 
     companion object {
 //        const val KEY_MESSAGE = "message"
@@ -71,7 +74,7 @@ class SecondActivity : ComponentActivity() {
                             .padding(innerPadding),
                         contentAlignment = Alignment.Center
                     ) {
-                        SecondActivityContentView()
+                        SecondActivityContentView(secondActivityViewModel = secondActivityViewModel)
                     }
                 }
             }
@@ -80,7 +83,7 @@ class SecondActivity : ComponentActivity() {
 }
 
 @Composable
-fun SecondActivityContentView(modifier: Modifier = Modifier) {
+fun SecondActivityContentView(modifier: Modifier = Modifier, secondActivityViewModel: SecondActivityViewModel) {
 
     val count by secondActivityViewModel.count.collectAsStateWithLifecycle()
 
