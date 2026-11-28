@@ -14,6 +14,9 @@ import kotlinx.coroutines.flow.asStateFlow
  * --------------------------------------------------------------------------
  */
 
+
+val secondActivityViewModel = SecondActivityViewModel()
+
 class SecondActivityViewModel: ViewModel() {
 
     private val _count = MutableStateFlow(0)

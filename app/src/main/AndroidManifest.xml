@@ -13,20 +13,12 @@
         android:theme="@style/Theme.BroTestApp">
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.BroTestApp"
-            android:windowSoftInputMode="adjustResize">
+            android:exported="true">
 
         </activity>
+
         <activity
             android:name=".SecondActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MyActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MyExamActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.BroTestApp"
@@ -36,6 +28,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MyActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".MyExamActivity"
+            android:exported="false">
+
         </activity>
     </application>
 

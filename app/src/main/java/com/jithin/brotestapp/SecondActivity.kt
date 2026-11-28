@@ -33,10 +33,10 @@ import kotlinx.coroutines.launch
 class SecondActivity : ComponentActivity() {
 
     companion object {
-        const val KEY_MESSAGE = "message"
+//        const val KEY_MESSAGE = "message"
         fun launchActivity(context: Context, message: String?) {
             val intent = Intent(context, SecondActivity::class.java)
-            intent.putExtra(KEY_MESSAGE, message)
+//            intent.putExtra(KEY_MESSAGE, message)
             context.startActivity(intent)
         }
     }
@@ -46,8 +46,8 @@ class SecondActivity : ComponentActivity() {
         printLog("SecondActivity: onCreate")
         enableEdgeToEdge()
 
-        val message = intent.getStringExtra(KEY_MESSAGE)
-        printLog("$message")
+//        val message = intent.getStringExtra(KEY_MESSAGE)
+//        printLog("$message")
 
 //        lifecycle.currentState == Lifecycle.State.INITIALIZED
 //
@@ -71,75 +71,32 @@ class SecondActivity : ComponentActivity() {
                             .padding(innerPadding),
                         contentAlignment = Alignment.Center
                     ) {
-                        val count by BroLogger.vm.count.collectAsStateWithLifecycle()
-                        Greeting(
-                            name = "I am 2nd Activity: $count",
-                            onClickGoBack = {
-                                finish()
-                            }
-                        )
+                        SecondActivityContentView()
                     }
                 }
             }
         }
     }
-
-    override fun onStart() {
-        super.onStart()
-        printLog("SecondActivity: onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        printLog("SecondActivity: onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        printLog("SecondActivity: onPause")
-        BroLogger.vm.increment()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        printLog("SecondActivity: onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        printLog("SecondActivity: onDestroy")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        printLog("SecondActivity: onRestart")
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        printLog("SecondActivity: onSaveInstanceState")
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-//        count = savedInstanceState.getInt("count")
-
-        super.onRestoreInstanceState(savedInstanceState)
-        printLog("SecondActivity: onRestoreInstanceState")
-    }
 }
 
 @Composable
-fun Greeting(name: String, onClickGoBack: () -> Unit, modifier: Modifier = Modifier) {
+fun SecondActivityContentView(modifier: Modifier = Modifier) {
+
+    val count by secondActivityViewModel.count.collectAsStateWithLifecycle()
+
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Hello $name! "
+            text = "Count: $count"
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = onClickGoBack) {
-            Text("Go Back")
+        Button(onClick = {
+            secondActivityViewModel.increment()
+        }
+        ) {
+            Text("Increment Count")
         }
     }
 }
